@@ -1,0 +1,358 @@
+G2F 2014 Hybrid Data
+
+Female parents of hybrids were divided in 9 heterotic pools based on genetic
+background (Table 2).
+Each of the heterotic pools (1-8) were crossed with multiple testers (Table 3).
+Each combination of tester and heterotic pool was designated as an ‘experiment’
+(Table 4).
+
+
+Table 2.
+Description of Heterotic Pools.
+
+Set | Heterotic Pool        | Description
+----|-----------------------|--------------------------------------------------
+0   | Local Checks          | Locally adapted hybrids (performance checks)
+    |                       | chosen by Cooperators & named in pedigree 
+    |                       | columns of data files.
+1   | B73 x Mo17 (IBM) RIL  |
+2   | B73 x Oh43 RIL        |
+3   | B73 x Ki3 RIL         |
+4   | Iodent Lines          |
+5   | Stiff Stalk Lines     |
+6   | Lancaster Lines       |
+7   | Texas Lines           |
+8   | WI RIL                |
+9   | Common Hybrids        |
+
+
+Final data included 858 hybrids with approximately 250 hybrids grown at each
+Field-location except for Ames, IA, where an attempt was made to plant all
+hybrids.  The experiment was a modified form of a split plot design with
+individual trials as the whole plot factor arranged in a randomized complete
+block design and hybrids as the subplot factor.  The design differed from a
+classical split plot because the subplot factor (hybrid) was nested within the
+whole plot factor (trial).  In classical split plot designs, whole-plot and sub
+-plot factors are cross-classified.
+
+A local check was selected, by the investigator, at each location and one local
+check plot was grown within each block within each replicate.  Each hybrid was
+assigned a unique hybrid code (located in ‘code’ column of the dataset). 
+Hybrid experiments were grown at 21 field-locations with two experiments (NYH1
+and NYH2) located geographically on the same farm at Aurora, NY.
+
+Investigators indicated certain plots had been replaced with filler (any
+variety of corn used as a placeholder for missing plots) and or certain plots
+should be discarded (Table 4).  Columns indicated as Filler may have data in
+the data set, but those data are considered unusable by the investigator.  In
+addition, some values were identified as being out of range of observable
+values and those observations changed to missing values in the final curated
+data set with conditions listed in Table 5.  Comments provided by investigators
+are provided in Table 6.
+
+
+Table 3.
+Trial number designations for each combination of heterotic pool (designated
+‘Pool’ in Table) and Tester.  Trials 0 and 9 (not shown in Table) represented
+local check hybrids chosen by investigators (trial 0) and common check hybrids
+chosen by G2F (trial 9).
+
+      |  Tester 1  Tester 2  Tester 3  Tester 4  Tester 
+Pool  |   PB80      LH195     CG102     LH198     LH185
+------|-------------------------------------------------
+1     |     2         7         13        19        25
+2     |     3         8         14        20        26
+3     |     4         9         15        21        27
+4     |     5         10        16        22        28
+5     |                                             25
+6     |     5         10        17        23
+7     |     5         10        17        23        28
+8     |     6         11        18        24        29
+
+
+
+
+Table 4.
+Columns in the data file.
+
+Column Name           | Column Description
+----------------------|--------------------------------------------------------
+RecId                 | Internal database id number unique to each plot.
+                      |
+Field-Locations       | G2F Field-location name. One experiment planted per 
+                      | location except Aurora, NY and Columbia, MO, which had 
+                      | 2 experiments.  Experiments in Ames, IA (IAH1) 
+                      | randomized as three sub-experiments (designated IAH1a, 
+                      | IAH1b, and IAH1c).
+                      |
+State                 | State where grown.
+                      |
+City                  | Nearest City to experiment.
+                      |
+Code                  | Unique code assigned to the hybrid.
+                      |
+Source                | Code assigned by project producing seed 
+                      | designating specific origin of seed of the hybrid 
+                      | including season, location, and nursery row number. 
+                      |  Commercial hybrid name in the case of local checks.
+                      |
+Pedigree              | Pedigree or name of the hybrid.  Commercial hybrid name 
+                      | in the case of local checks (if provided by 
+                      | investigators).
+                      |
+Experiment            | G2F designation which indicates combination of tester 
+                      | and heterotic pool.  Experiment zero used for local 
+                      | checks and 1 is the common set of hybrids grown across 
+                      | all Field-locations (Table 3).
+                      |
+Heterotic Pools       | Designation of germplasm set of female parents 
+                      | (numbers 1-9).  Common checks designated as set zero
+                      | and hybrids without a common tester as male parent 
+                      | designated  as set 9 (Table 2).
+                      |
+Rep                   | Replicate block (2 blocks per experiment).
+                      |
+Block                 | Block within replicate (one trial generally assigned to 
+                      | a block with some exceptions due to substitutions and 
+                      | very  small trials).
+                      |
+Plot                  | Designation of individual experimental unit.
+                      |
+Range                 | Designation of field range of the plot (ranges are 
+                      | organized perpendicular to corn rows).
+                      |
+Pass                  | Designation of field pass of the plot (passes are
+                      | organized parallel to corn rows; combination of range 
+                      | and pass form coordinate grid system describing 
+                      | location of each plot within the field).
+                      |
+Plot Area             | Planted area (excluding alley) of the plot in square 
+                      | feet and used in grain yield calculation.
+                      |
+Date Planted          | Date the plot was planted.
+                      |
+Date Harvested        | Date the plot was harvested.
+                      |
+Anthesis [date]       | Days between planting and 50% of plants of a plot
+                      | exhibit another exertion on more than half of the main 
+                      | tassel spike.*
+                      |
+Silk Date/Silking     | Days between planting and 50% of plants of a plot show
+                      | silk emergence.*
+                      | 
+Stand Count [percent] | Number of plants per plot at harvest.
+                      |
+Pollen DAP [days]     | Number of days after planting that 50% of plants in the
+                      | plot began shedding pollen.
+                      |
+Silk [date]           | Number of days after planting that 50% of plants in the 
+                      | plot had visible silks.
+                      |
+Plant Height [cm.]    | Measured as the distance between the base of a plant 
+                      | and the ligule of the flag leaf.
+                      |
+Ear Height [cm.]      | Measured as the distance from the ground to the primary 
+                      | ear bearing node.
+                      |
+Root Lodging [plants] | Number of plants that show root lodging per plot, i.e.,
+                      | those stems that lean substantially to one side (> 15%
+                      | from vertical).  Count includes ‘goosenecked’ plants 
+                      | that have ‘straightened up’ after becoming lodged 
+                      | earlier in the season.
+                      |
+Stalk Lodging         |
+[plants]              | Number of plants broken between ground level and top ear
+                      | node at harvest.
+                      |
+Grain Moisture        | Water content in grain at harvest.
+[percent]             |
+                      |
+Test Weight [lbs/bu]  | Shelled grain weight per bushel. 
+                      |
+Plot Weight [lbs.]    | Shelled grain weight per plot.
+                      |
+Plot Discarded        | Value of ‘yes’ if investigator believes no data from
+                      | the plot should be used due to problem affecting all 
+                      | data.
+                      |
+Grain yield           |
+[bu/A]                | Grain yield in bushels per acre at 15.5% grain moisture
+                      | assuming 56lbs. per bushel and using plot area without
+                      | alley*. 
+                      |
+Comments              | Plot-specific comments provided by the investigator.
+                      |
+Filler                | Value of ‘Filler’ if filler was substituted for 
+                      | original entry.
+                      |
+Lodging Rating        | Lodging rating taken in lieu of lodging counts (TXH1).
+                      |
+Damaged Plants        | Number of plants damaged by hogs (GAH1).
+                      |
+Raccoon Damage Rating | Rating (1-5) of severity of raccoon damage 
+                      | (5=most severe) (NYH1).
+                      |
+Percent Northern      |
+Leaf Blight (%)       | Percent northern leaf blight (NYH1).
+                      |
+Planting Date         | Date plot planted.
+                      |
+Harvest Date          | Date plot harvested.
+                      |
+Plant Height          |
+[cm. to tip of tassel]| Height to top of tassel (TXH1).
+                      |
+Green Snap (optional) | Number of plants broken between ground level and top 
+                      | ear node before flowering.
+
+    * yield = (weight(lbs)/area(ft2))*
+              ((100-moisture)/84.5))*(1(bu)/56(lbs))*(43560(ft2)/1(acre))
+      Yield = grain yield in bushels per acre.
+     Weight = observed weight of harvested grain per plot in lbs.
+       Area = harvested area of plot in square feet.
+   Moisture = percent grain moisture. 
+
+
+Table 5.
+Conditions for declaring observations out of range.
+
+                   |                                    | Columns Set to
+Trait              | Condition for Setting to Missing   | Missing
+-------------------|------------------------------------|---------------------
+Pollen DAP [days]* | Less than 20 or more than 100      | Pollen DAP
+Silk DAP   [days]* | Greater than 100                   | Silk DAP
+Ear Height [cm.]   | Less than 20                       | Ear Height
+Weight     [lbs.]  | Less than 1.0                      | Weight, Grain yield,
+                   |                                    | Grain Moisture, Test
+                   |                                    | Weight
+*DAP = days after planting.
+
+
+
+Table 6. 
+Comments provided by collaborators for hybrid trials.
+
+Loc Name Collaborator  Collaborator Comments
+------------------------------------------------------------------------------
+DE Randy Wisser 
+                       TWT missing for all plots due to machine failure
+GA Joe Knoll 
+                       Discard plot weights below 3lbs. Low plot weights due to 
+                       hog damage. 3.5 days in April are missing soil temp 
+                       data; probe was blown loose from unit. Additional G2F 
+                       metadata GA1-2014.xlsx contains image and inconsistent 
+                       formatting. Data file contains Hog D = count of plants 
+                       damaged by hogs
+
+IA1 Jode Edwards 
+                       No Comments
+
+IA2 Jode Edwards 
+                       No Comments
+
+IA3 Jode Edwards 
+                       No Comments
+
+IA4 Jode Edwards 
+                       No Comments
+
+IL1 Martin Bohn 
+                       No Comments
+
+IN Torbert Rocheford 
+                       Unusually cold summer blamed for late flowering time
+
+MN Candy Hirsh Nathan Springer
+                       Possible evidence of crazy top?
+
+MO1 Sherry Flint-Garcia
+                       No test weight; WHOLE TRIAL: STC is plants after
+                       thinning to a max of 54 per plot; WHOLE TRIAL: SLD
+                       contains brittle snap in early July and stalk lodging at 
+                       harvest
+
+MO2 Sherry Flint-Garcia
+                       No test weight; trial: this trial not thinned; grew too
+                       fast and plants too big too fast
+NC Jim Holland
+                       grasshoppers in weather station; precipitation
+                       measurements suspect. Even with regular checking; after 
+                       a hard rain, there was water pooled in the catch basin. 
+                       Yields recorded in lbs. per plot. Missing data coded as 
+                       NA. No outlier checks completed. Root and stalk lodging 
+                       are counts of plants.
+
+NE1 Aaron Lorenz 
+                       Coordinates are approximate. Note that flowering and 
+                       performance data are in two separate files. Column 
+                       headers in G2FNE1-HYBPrism.csv are inconsistent
+
+NE2 Aaron Lorenz 
+                       Coordinates are approximate. The North Platte site is 
+                       within 150' of 41.0529978 and -100.749467. Performance 
+                       data on sheet2. Format of datasheet may be incompatible 
+                       for PRISM import. Compaction and missing plots reported 
+                       in column X of data sheet.
+
+NY2 Cinta Romay 
+                       1. The combine we used did not get test weight data. 
+                       So, that column is missing.   2. The day we did the 
+                       stand counts it was freezing cold and really hard to be 
+                       outside. I did my best on QC the data and in most of the 
+                       cases it was easy to figure out what the mistake was; 
+                       but as results there are a few missing datapoints.  3. 
+                       Sherrie; the technician who did the harvesting send me 
+                       the following note: "There are several entries that have 
+                       a fairly large moisture difference between reps. We did 
+                       harvest rep 1 about a week before rep 2 but that 
+                       shouldn’t account for 5+ % difference. We have 
+                       experienced that wet plots may leave some residual 
+                       moisture that could carry over to the reading for the 
+                       next plot(s). Some of this material is just too late for 
+                       our growing environment. This information should forward 
+                       along with the data as an explanation" 
+
+ON1 Liz Lee 
+                       Discard plot weights below 3lbs. Moisture rating only
+                       accurate into low 40s, discard moistures above 45. In 
+                       some places this trial refered to as GON.
+
+ON2 Liz Lee 
+                       Discard plot weights below 3lbs. Lodging notes are 
+                       recorded as % of the plot that was lodged. Severe wind 
+                       storm before harvest led to extreme lodging. - Kenneth 
+                       Van Raay (kvanra01@uoguelph.ca). In some places this 
+                       trial referred to as RON.
+
+TX1 Seth Murray 
+                       Check that PHT, EHT recorded in CM and not inches. 
+                       PHT measured to tip of tassel
+
+TX2 Wenwei Xu 
+                       Check that PHT and EHT recorded in CM and not inches.
+                       Some files refer to this location as TX3 hybrid. 1. The 
+                       population in this field was below our target 
+                       population. We started with very low soil moisture 
+                       profile (bone dry as the farmers called) due to 
+                       prolonged drought from November 2013 to May 26 this 
+                       year. The field was watered with a center pivot. We 
+                       watered the field before planting and also watered 
+                       regularly during the growing season. But the windy 
+                       weather and dry soil made it very challenging to 
+                       establishing a good stand; and also hurt the root system 
+                       in the early stage. As a result; plants were much 
+                       shorter than past years; yield was far below our target 
+                       yield of 250 bu/ac. 2. You will notice that the plant 
+                       counts were very low in the first three ranges which 
+                       were located in the south end of the pivot section and 
+                       had lower soil due to the winds and no plant protection 
+                       from the driveway and also cotton field. 3. Inbred line 
+                       test was located inside the field. Low population was 
+                       primarily due to the poor seed germination? I am pretty 
+                       happy with the inbred data.
+
+WI Natalia  de Leon 
+                       No Comments
+
+
+
