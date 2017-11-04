@@ -35,3 +35,7 @@ Data Set Goals: Yield; how well it grows; not genes
 
 9.
 genomes2fields.org
+
+10.
+[demo19@login.crane demo19]$ cd $WORK
+[demo19@login.crane demo19]$ cp -r /work/demo/shared/data ./
