@@ -1,2 +1,12 @@
-1. Download Putty or use Terminal
+1. 
+Download Putty or use Terminal
+
 2. 
+Purge policy exists on /work, see https://hcc-docs.unl.edu/x/4BEF
+[demo19@login.crane ~]$ pwd
+/home/demo/demo19
+[demo19@login.crane ~]$ cd $WORK
+[demo19@login.crane demo19]$ pwd
+/work/demo/demo19
+[demo19@login.crane demo19]$ 
+
