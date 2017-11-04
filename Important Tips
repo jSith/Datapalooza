@@ -14,8 +14,12 @@ Purge policy exists on /work, see https://hcc-docs.unl.edu/x/4BEF
 Sam's Globus Setup Key: 4174b3df-8c33-4347-b50d-8e0eb2fad7ef
 Jessica's Globus Key: dffaea8a-3861-46b0-898e-4725c7a57ee7
 
-4. Common job errors:  
+4. 
+Common job errors:  
   slurmstepd:	error: Exceeded step memory limit at some point.
     The job exceeded the requested memory. Increase memory and resubmit
   JOB <jobid> CANCELLED AT <time> DUE TO TIME LIMIT
     The job exceeded the requested walltime. Increase time and resubmit.
+    
+5.
+squeue -u <Login>
