@@ -39,3 +39,6 @@ genomes2fields.org
 10.
 [demo19@login.crane demo19]$ cd $WORK
 [demo19@login.crane demo19]$ cp -r /work/demo/shared/data ./
+
+11.
+http://datacommons.cyverse.org/browse/iplant/home/shared/commons_repo/curated/_deprecated_Carolyn_Lawrence_Dill_G2F_Nov_2016_V2
