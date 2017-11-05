@@ -1,0 +1,191 @@
+
+
+
+
+```{r}
+aRaw <- read.csv("C:/Users/John/Desktop/Datapalooza/Datapalooza/Data/a._2014_hybrid_phenotypic_data/g2f_2014_hybrid_raw.csv")
+```
+
+
+#Gets rid of Discarded Plots and Filler from the dataframe
+```{r}
+hybridData <- subset(aRaw, aRaw$Plot.Discarded != "Yes" & aRaw$Filler != "Yes")
+
+print(cor(hybridData$Root.lodging..plants., hybridData$Stalk.lodging..plants., use="pairwise.complete.obs"))
+```
+
+
+```{r}
+lodging <- data.frame(hybridData$Root.lodging..plants., hybridData$Stalk.lodging..plants., hybridData$Grain.yield..bu.A.)
+
+#max(rootLodging, na.rm=TRUE)
+
+
+grainYield <- hybridData[,30]
+
+
+
+
+zeroLodging <- subset(lodging, lodging$hybridData.Root.lodging..plants. == 0 & lodging$hybridData.Stalk.lodging..plants. == 0)
+highLodging <- subset(lodging, lodging$hybridData.Root.lodging..plants. + lodging$hybridData.Stalk.lodging..plants. >= 20)
+#mean(zeroLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+#mean(highLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+zMedian <- median(zeroLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+hMedian <- median(highLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+
+zYield <- zeroLodging$hybridData.Grain.yield..bu.A.
+hYield <- highLodging$hybridData.Grain.yield..bu.A.
+
+zMean <- mean(zYield, na.rm=TRUE)
+hMean <- mean(hYield, na.rm=TRUE)
+zMean - hMean
+
+zSd <- sd(zYield, na.rm=TRUE)
+hSd <- sd(hYield, na.rm=TRUE)
+
+x = seq(25, 275, 0.01)
+
+plot(x, dnorm(x, zMean, zSd), col="firebrick", type="l", main="Normal Distributions of Varying Lodgings", xlab="Grain Yield", ylab="Probability Distribution      Function", ylim = c(0, 0.01))
+lines(x, dnorm(x, hMean, hSd), col="dodgerblue1", type="l")
+
+
+
+# *****AREA UNDER THE CURVE*****
+percentDifference <- (1 - pnorm(151, zMean, zSd)) - (1 - pnorm(151, hMean, hSd))
+
+
+medDifference <- zMedian - hMedian
+
+
+# dim(lodging)
+# dim(zeroLodging)
+# dim(highLodging)
+
+
+
+
+
+
+```
+
+
+#Lodging by pedigree 
+
+```{R}
+rootlodging <- hybridData$Root.lodging..plants
+stalklodging <- hybridData$Stalk.lodging..plants
+
+maxroot <- max(rootlodging, na.rm=TRUE)
+maxstalk <- max(stalklodging, na.rm=TRUE)
+worstRootPedigree <- pedigree[which(rootlodging==maxroot)]
+worstStalkPedigree <- pedigree[which(stalklodging==maxstalk)]
+
+
+minroot <- min(rootlodging, na.rm=TRUE)
+minstalk <- min(stalklodging, na.rm=TRUE)
+bestRootPedigree <- pedigree[which(rootlodging == minroot)]
+bestStalkPedigree <- pedigree[which(stalklodging == minstalk)]
+
+sprintf("Worst Root Lodging Pedigree: %s Root Lodging: %f", worstRootPedigree[1], maxroot[1])
+sprintf("Worst Stalk Lodging Pedigree: %s Root Lodging: %f", worstStalkPedigree[1], maxstalk[1])
+
+```
+
+
+#Yield by pedigree
+
+```{R}
+max <- max(medYields)
+min <- min(medYields)
+maxOccurrences <- max(occurrences)
+
+topPedigree <- pedigree[which(medYields==max)]
+topSample <- occurrences[which(medYields==max)]
+
+
+bottomPedigree <- pedigree[which(medYields == min)]
+bottomSample <- occurrences[which(medYields==min)]
+
+mostCommon <- pedigree[which(occurrences == maxOccurrences)]
+commonYield <- medYields[which(occurrences == maxOccurrences)]
+
+
+sprintf("Best Pedigree: %s Median Yield: %f Sample Size: %d", topPedigree[1], max, topSample)
+sprintf("Worst Pedigree: %s Median Yield: %f Sample Size: %d", bottomPedigree[1], min, bottomSample)
+sprintf("Most Popular Pedigree: %s, Median Yield: %f Sample Size: %d", mostCommon[1], commonYield[1], maxOccurrences)
+
+```
+
+
+#This shows how root lodgings affect the total yields of a farm
+```{r}
+lodging <- data.frame(hybridData$Root.lodging..plants., hybridData$Stalk.lodging..plants., hybridData$Grain.yield..bu.A.)
+lodging
+
+max(rootLodging, na.rm=TRUE)
+
+
+grainYield <- hybridData[,30]
+zeroLodging <- subset(lodging, lodging$hybridData.Root.lodging..plants. == 0 & lodging$hybridData.Stalk.lodging..plants. == 0)
+
+
+
+highLodging <- subset(lodging, lodging$hybridData.Root.lodging..plants. + lodging$hybridData.Stalk.lodging..plants. >= 20)
+highLodging
+
+mean(zeroLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+mean(highLodging$hybridData.Grain.yield..bu.A., na.rm=TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
+hist(rootLodging, breaks=60, col="firebrick", xlim=c(0,30), ylim=c(0,2000))
+legend("topright", c("Root Lodge Count:", "8,117 with zero lodges", "1,762 with low lodges", "301 with high lodges"))
+
+zYield <- subset(hybridData[,30], hybridData[,25] == 0, na.rm = TRUE)
+lYield <- subset(hybridData[,30], hybridData[,25] < 10 & hybridData[,25] > 0, na.rm=TRUE)
+hYield <- subset(hybridData[,30], hybridData[,25] >= 10, na.rm=TRUE)
+
+zMean = mean(zYield, na.rm = TRUE)
+lMean = mean(lYield, na.rm = TRUE)
+hMean = mean(hYield, na.rm = TRUE)
+
+zSD = sd(zYield, na.rm = TRUE)
+lSD = sd(lYield, na.rm = TRUE)
+hSD = sd(hYield, na.rm = TRUE)
+
+x = seq(25, 275, 0.01)
+
+plot(x, dnorm(x, zMean, zSD), col="green", type="l", ylim = c(0, 0.01))
+lines(x, dnorm(x, lMean, lSD), col="red", type="l")
+lines(x, dnorm(x, hMean, hSD), col="blue", type="l")
+legend("topright", legend = c("Zero", "Low", "High"), fill = c("green", "red", "blue"))
+
+(zMean - hMean)/ zMean
+zMean - hMean
+```
+Y
+
+#This shows what cities have the highest root lodgings on average
+```{r}
+cities <- unique(hybridData$City)
+cities
+
+averageRootLodging <- c()
+for (i in 1:20){
+  dataByCity <- subset(hybridData, hybridData$City == cities[i])
+  averageRootLodging[i] <- sum(dataByCity$Root.lodging..plants., na.rm=TRUE)
+}
+df <- data.frame(cities, averageRootLodging)
+df
+```
+
+

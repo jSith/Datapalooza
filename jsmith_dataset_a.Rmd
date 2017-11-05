@@ -89,22 +89,46 @@ hist(mbx$Grain.yield..bu.A., col="darkslategray3", breaks=25)
 
 ```{R}
 
-topPedigrees = matrix(nrow=33, ncol=3, byrow=TRUE)
-m <- 1
+topPedigrees <- c()
+#par(mfrow=c(11,3))
 for (i in seq(1:881)){
   if (occurrences[i] >= 40){
     popularPedigree <- (pedigree[i][1])
-    topPedigrees[m,1] <- popularPedigree
+    topPedigrees <- c(topPedigrees, popularPedigree[1])
+   # topPedigrees[m,1] <- popularPedigree
     avgYield <- meanYields[i][1]
-    topPedigrees[m,2] <- avgYield
+  #  topPedigrees[m,2] <- avgYield
     medianYield <- medYields[i][1]
-    topPedigrees[m,3] <- medianYield
-    m <- m+1
+   # topPedigrees[m,3] <- medianYield
+  #  m <- m+1
     #subsetYield <- subset(hybridData, hybridData$Pedigree == popularPedigree)
-    #hist(subsetYield$Grain.yield..bu.A., main=popularPedigree, xlab="Crop Yield")
+   # hist(subsetYield$Grain.yield..bu.A., main=popularPedigree, xlab="Crop Yield")
   }
 }
 
 print(topPedigrees)
+
+```
+
+
+```{R}
+rootlodging <- hybridData$Root.lodging..plants
+stalklodging <- hybridData$Stalk.lodging..plants
+
+maxroot <- max(rootlodging, na.rm=TRUE)
+maxstalk <- max(stalklodging, na.rm=TRUE)
+worstRootPedigree <- pedigree[which(rootlodging==maxroot)]
+worstStalkPedigree <- pedigree[which(stalklodging==maxstalk)]
+
+
+minroot <- min(rootlodging, na.rm=TRUE)
+minstalk <- min(stalklodging, na.rm=TRUE)
+bestRootPedigree <- pedigree[which(rootlodging == minroot)]
+bestStalkPedigree <- pedigree[which(stalklodging == minstalk)]
+
+sprintf("Worst Root Lodging Pedigree: %s Root Lodging: %f", worstRootPedigree[1], maxroot[1])
+sprintf("Worst Stalk Lodging Pedigree: %s Root Lodging: %f", worstStalkPedigree[1], maxstalk[1])
+
+
 
 ```
