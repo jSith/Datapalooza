@@ -6,7 +6,6 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-require(rpart)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -35,70 +34,36 @@ for (i in seq(1:881)){
 ```
 
 ```{R}
-max <- head(meanYields[order(-meanYields)])
-min <- tail(meanYields[order(-meanYields)])
-pop <- head(occurrences[order(-occurrences)])
-
-
-cat("Best Pedigrees \n")
-for (m in seq(1,5)){
-  topPedigree <- pedigree[which(meanYields==max[m])]
-  topSample <- occurrences[which(meanYields==max[m])]
-  cat(sprintf("%d: %s Mean Yield: %f Sample Size: %d \n", m, topPedigree[1], max[m], topSample))
-}
-
-cat("\n Worst Pedigrees \n")
-for (n in seq(1,5)){
-  bottomPedigree <- pedigree[which(meanYields == min[n])]
-  bottomSample <- occurrences[which(meanYields==min[n])]
-  cat(sprintf("%d: %s Mean Yield: %f Sample Size: %d \n", 876+n, bottomPedigree[1], min[n], bottomSample))
-}
-
-cat("\n Most Popular Pedigrees \n")
-for (p in seq(1,5)){
-  bottomPedigree <- unique(pedigree[which(occurrences==pop[p])])
-  bottomSample <- unique(occurrences[which(occurrences==pop[p])])
-  cat(sprintf("%d: %s Median Yield: %f Sample Size: %d \n", p, bottomPedigree[1], min[p], bottomSample))
-}
+max <- max(meanYields)
+min <- min(meanYields)
+topPedigree <- pedigree[which(meanYields==max)]
+topSample <- occurrences[which(meanYields==max)]
+bottomPedigree <- pedigree[which(meanYields == min)]
+bottomSample <- occurrences[which(meanYields==min)]
+sprintf("Best Pedigree: %s Mean Yield: %f Sample Size: %d", topPedigree[1], max, topSample)
+sprintf("Worst Pedigree: %s Mean Yield: %f Sample Size: %d", bottomPedigree[1], min, bottomSample)
 
 
 ```
 ```{R}
+max <- max(medYields)
+min <- min(medYields)
+maxOccurrences <- max(occurrences)
 
-max <- head(medYields[order(-medYields)])
-min <- tail(medYields[order(-medYields)])
-pop <- head(occurrences[order(-occurrences)])
-middle <- median(medYields)
-
-cat("Best Pedigrees \n")
-for (m in seq(1,5)){
-  topPedigree <- pedigree[which(medYields==max[m])]
-  topSample <- occurrences[which(medYields==max[m])]
-  cat(sprintf("%d: %s Median Yield: %f Sample Size: %d \n", m, topPedigree[1], max[m], topSample))
-}
-
-cat("\nMost Popular Pedigree \n")
-bottomPedigree <- unique(pedigree[which(occurrences==pop[1])])
-bottomSample <- pop[1]
-med <- medYields[which(occurrences==pop[1])]
-orderedYields <- medYields[order(-medYields)]
-location <- which(orderedYields==med[1])
-cat(sprintf("%d: %s Median Yield: %f Sample Size: %d \n", location[1], bottomPedigree[1], med[1], bottomSample[1]))
-
-cat("\nMedian Pedigree \n")
-topPedigree <- pedigree[which(medYields==middle[1])]
-topSample <- occurrences[which(medYields==middle[1])]
-location <- which(orderedYields==middle[1])
-cat(sprintf("%d: %s Median Yield: %f Sample Size: %d \n", location[1], topPedigree[1], middle[1], topSample))
+topPedigree <- pedigree[which(medYields==max)]
+topSample <- occurrences[which(medYields==max)]
 
 
-cat("\nWorst Pedigrees \n")
-for (n in seq(1,5)){
-  bottomPedigree <- pedigree[which(medYields == min[n])]
-  bottomSample <- occurrences[which(medYields==min[n])]
-  cat(sprintf("%d: %s Median Yield: %f Sample Size: %d \n", 877+n, bottomPedigree[1], min[n], bottomSample))
-}
+bottomPedigree <- pedigree[which(medYields == min)]
+bottomSample <- occurrences[which(medYields==min)]
 
+mostCommon <- pedigree[which(occurrences == maxOccurrences)]
+commonYield <- medYields[which(occurrences == maxOccurrences)]
+
+
+sprintf("Best Pedigree: %s Median Yield: %f Sample Size: %d", topPedigree[1], max, topSample)
+sprintf("Worst Pedigree: %s Median Yield: %f Sample Size: %d", bottomPedigree[1], min, bottomSample)
+sprintf("Most Popular Pedigree: %s, Median Yield: %f Sample Size: %d", mostCommon[1], commonYield[1], maxOccurrences)
 
 ```
 
@@ -165,78 +130,5 @@ sprintf("Worst Root Lodging Pedigree: %s Root Lodging: %f", worstRootPedigree[1]
 sprintf("Worst Stalk Lodging Pedigree: %s Root Lodging: %f", worstStalkPedigree[1], maxstalk[1])
 
 
-
-```
-
-
-```{R}
-
-dkcindices <- grep("DKC", hybridData$Pedigree)
-dkcbreed <- c()
-
-for (t in seq(1, length(dkcindices))){
-  
-  index <- dkcindices[t]
-  dkcbreed <- c(dkcbreed, hybridData$Grain.yield..bu.A.[index])
-
-}
-
-max <- head(medYields[order(-medYields)])
-topbreed <- c()
-for (m in seq(1,5)){
-  topPedigree <- pedigree[which(medYields==max[m])]
-  topindices <- grep(topPedigree, hybridData$Pedigree)
-
-  for (t in seq(1, length(topindices))){
-    
-    index <- topindices[t]
-    topbreed <- c(topbreed, hybridData$Grain.yield..bu.A.[index])
-  
-  }
-}
-
-par(mfrow=c(1,2))
-hist(mbx$Grain.yield..bu.A., col="turquoise", breaks=25, main="Most Popular Pedigree", xlab="Grain Yield", xlim=c(100,325))
-hist(topbreed, breaks=15, xlab="Grain Yield", main="Best Yielding Pedigrees", xlim=c(100,325), col="red2")
-
-```
-
-```{R}
-hybridRaw = read.csv('Data/a._2014_hybrid_phenotypic_data/g2f_2014_hybrid_raw.csv')
-hybridRaw = subset(hybridRaw, hybridRaw$Plot.Discarded != "Yes" & hybridRaw$Filler != "Yes" & hybridRaw$Grain.yield..bu.A. > 0)
-hybridRaw = hybridRaw[!is.na(hybridRaw$Grain.yield..bu.A.),]
-
-grainYield = hybridRaw[, 30]
-datePlanted = as.Date(hybridRaw[, 16], "%m/%d/%Y")
-
-meanYieldsByDate = c()
-medianYieldsByDate= c()
-
-dates = sort(unique(datePlanted))
-print(dates)
-
-for(i in 1:length(dates)) {
-indices = which(datePlanted == dates[i])
-meanYieldsByDate = c(meanYieldsByDate, mean(grainYield[indices], na.rm = TRUE))
-medianYieldsByDate = c(medianYieldsByDate, median(grainYield[indices], na.rm = TRUE))
-}
-
-dateLabels = c()
-plot(dates, y = medianYieldsByDate, type = "b", xlim = as.Date(c("2014-04-01","2014-06-04")), xlab = "Date Planted", ylab = "Grain Yield", main = "Median Grain Yield by Date Planted", col = "darkviolet", lwd = 3)
-text(dates, medianYieldsByDate, labels = c("", "Apr 4", "", "", "", "May 6", "May 7", "May 9", "May 14", "", "", "", "", "May 20", "", "", "", "May 29"), pos = 4, offset = 0.3, font = 2)
-```
-
-```{R}
-dates = sort(unique(datePlanted))
-uniqueLocations <- c()
-
-for(i in 1:length(dates)) {
-  
-  print(hybridRaw$Date.Planted)
-  location <- hybridRaw[which(hybridRaw$Date.Planted == dates[i])]
-  uniqueLocations <- c(uniqueLocations, location)
-
-}
-print(uniqueLocations)
 
 ```
